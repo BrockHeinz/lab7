@@ -84,21 +84,26 @@ def execute(user_action, contacts):
         print(f"I'm sorry, {user_action} is not a valid choice.")
         return contacts
 
-    # TODO: Make this better.  I want to use a dictionary instead of a bunch of
-    #       if-elif's, but I'm not sure how to store a *behavior* as a value in
-    #       a dictionary so it can be looked up and then carried out...
-    if user_action == 'c':
-        contacts = create_new_contact(contacts)
-    elif user_action == 'v':
-        contacts = view_contact(contacts)
-    elif user_action == 'd':
-        contacts = delete_contact(contacts)
-    elif user_action == 'u':
-        contacts = update_contact(contacts)
-    # I don't think this ever happens because of the way the while-loop that
-    # calls this function is structured, but just in case...
-    elif user_action == 'q':
+    ## TODO: Make this better.  I want to use a dictionary instead of a bunch of
+    ##       if-elif's, but I'm not sure how to store a *behavior* as a value in
+    ##       a dictionary so it can be looked up and then carried out...
+    # if user_action == 'c':
+    #     contacts = create_new_contact(contacts)
+    # elif user_action == 'v':
+    #     contacts = view_contact(contacts)
+    # elif user_action == 'd':
+    #     contacts = delete_contact(contacts)
+    # elif user_action == 'u':
+    #     contacts = update_contact(contacts)
+    ## I don't think this ever happens because of the way the while-loop that
+    ## calls this function is structured, but just in case...
+    if user_action == 'q':
         print("Quitting...\n")
+        return contacts
+
+    actions = {'c': create_new_contact, 'v': view_contact,
+               'd': delete_contact, 'u': update_contact}
+    contacts = actions[user_action](contacts)
 
     return contacts
 
@@ -168,31 +173,42 @@ def update_contact(contacts):
     #       copy-paste is making me nervous...
     field_to_update = prompt_for_field_choice()
     new_field_value = prompt_for_value_for_field(field_to_update)
-    if field_to_update == FIRST_NAME:
-        contacts = contact_store.update_contact_first_name(contacts,
-                                                           first_name,
-                                                           last_name,
-                                                           new_field_value)
-    elif field_to_update == LAST_NAME:
-        contacts = contact_store.update_contact_last_name(contacts,
-                                                           first_name,
-                                                           last_name,
-                                                           new_field_value)
-    elif field_to_update == EMAIL:
-        contacts = contact_store.update_contact_email(contacts,
+
+    # if field_to_update == FIRST_NAME:
+    #     contacts = contact_store.update_contact_first_name(contacts,
+    #                                                        first_name,
+    #                                                        last_name,
+    #                                                        new_field_value)
+    # elif field_to_update == LAST_NAME:
+    #     contacts = contact_store.update_contact_last_name(contacts,
+    #                                                        first_name,
+    #                                                        last_name,
+    #                                                        new_field_value)
+    # elif field_to_update == EMAIL:
+    #     contacts = contact_store.update_contact_email(contacts,
+    #                                                   first_name,
+    #                                                   last_name,
+    #                                                   new_field_value)
+    # elif field_to_update == PHONE_NUMBER:
+    #     contacts = contact_store.update_contact_phone_number(contacts,
+    #                                                          first_name,
+    #                                                          last_name,
+    #                                                          new_field_value)
+    # elif field_to_update == BIRTHDAY:
+    #     contacts = contact_store.update_contact_birthday(contacts,
+    #                                                      first_name,
+    #                                                      last_name,
+    #                                                      new_field_value)
+    updates = {FIRST_NAME: update_contact_first_name,
+               LAST_NAME: update_contact_last_name,
+               EMAIL: update_contact_email,
+               PHONE_NUMBER: update_contact_phone_number,
+               BIRTHDAY: update_contact_birthday}
+
+    contacts = contact_store.updates[field_to_update](contacts,
                                                       first_name,
                                                       last_name,
                                                       new_field_value)
-    elif field_to_update == PHONE_NUMBER:
-        contacts = contact_store.update_contact_phone_number(contacts,
-                                                             first_name,
-                                                             last_name,
-                                                             new_field_value)
-    elif field_to_update == BIRTHDAY:
-        contacts = contact_store.update_contact_birthday(contacts,
-                                                         first_name,
-                                                         last_name,
-                                                         new_field_value)
     return contacts
 
 
