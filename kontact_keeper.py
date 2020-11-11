@@ -174,41 +174,41 @@ def update_contact(contacts):
     field_to_update = prompt_for_field_choice()
     new_field_value = prompt_for_value_for_field(field_to_update)
 
-    # if field_to_update == FIRST_NAME:
-    #     contacts = contact_store.update_contact_first_name(contacts,
-    #                                                        first_name,
-    #                                                        last_name,
-    #                                                        new_field_value)
-    # elif field_to_update == LAST_NAME:
-    #     contacts = contact_store.update_contact_last_name(contacts,
-    #                                                        first_name,
-    #                                                        last_name,
-    #                                                        new_field_value)
-    # elif field_to_update == EMAIL:
-    #     contacts = contact_store.update_contact_email(contacts,
-    #                                                   first_name,
-    #                                                   last_name,
-    #                                                   new_field_value)
-    # elif field_to_update == PHONE_NUMBER:
-    #     contacts = contact_store.update_contact_phone_number(contacts,
-    #                                                          first_name,
-    #                                                          last_name,
-    #                                                          new_field_value)
-    # elif field_to_update == BIRTHDAY:
-    #     contacts = contact_store.update_contact_birthday(contacts,
-    #                                                      first_name,
-    #                                                      last_name,
-    #                                                      new_field_value)
-    updates = {FIRST_NAME: update_contact_first_name,
-               LAST_NAME: update_contact_last_name,
-               EMAIL: update_contact_email,
-               PHONE_NUMBER: update_contact_phone_number,
-               BIRTHDAY: update_contact_birthday}
+    #if field_to_update == FIRST_NAME:
+    #    contacts = contact_store.update_contact_first_name(contacts,
+    #                                                       first_name,
+    #                                                       last_name,
+    #                                                       new_field_value)
+    #elif field_to_update == LAST_NAME:
+    #    contacts = contact_store.update_contact_last_name(contacts,
+    #                                                       first_name,
+    #                                                       last_name,
+    #                                                       new_field_value)
+    #elif field_to_update == EMAIL:
+    #    contacts = contact_store.update_contact_email(contacts,
+    #                                                  first_name,
+    #                                                  last_name,
+    #                                                  new_field_value)
+    #elif field_to_update == PHONE_NUMBER:
+    #    contacts = contact_store.update_contact_phone_number(contacts,
+    #                                                         first_name,
+    #                                                         last_name,
+    #                                                         new_field_value)
+    #elif field_to_update == BIRTHDAY:
+    #    contacts = contact_store.update_contact_birthday(contacts,
+    #                                                     first_name,
+    #                                                     last_name,
+    #                                                     new_field_value)
+    updates = {FIRST_NAME: contact_store.update_contact_first_name,
+               LAST_NAME: contact_store.update_contact_last_name,
+               EMAIL: contact_store.update_contact_email,
+               PHONE_NUMBER: contact_store.update_contact_phone_number,
+               BIRTHDAY: contact_store.update_contact_birthday}
 
-    contacts = contact_store.updates[field_to_update](contacts,
-                                                      first_name,
-                                                      last_name,
-                                                      new_field_value)
+    contacts = updates[field_to_update](contacts,
+                                        first_name,
+                                        last_name,
+                                        new_field_value)
     return contacts
 
 
