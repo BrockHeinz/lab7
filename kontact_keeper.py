@@ -1,6 +1,6 @@
 import os
 import json
-# import <your lab file name> as contact_store
+import lab7 as contact_store
 
 VERSION_NUMBER = 'v1.3.7'
 
